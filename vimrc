@@ -25,39 +25,46 @@ nmap <C-l> <C-W>l
 " ----------------------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
 
-" fzf
+" FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-"already installed
-"Plug '/usr/local/opt/fzf'
-"Plug 'junegunn/fzf.vim'
+""git as a project dir
+"function! s:find_git_root()
+"  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+"endfunction
+"command! ProjectFiles execute 'Files' s:find_git_root()
+" gitignore
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+" FZF (replaces Ctrl-P, FuzzyFinder and Command-T)
+set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
+nmap ; :Buffers<CR>
+nmap <Leader>r :Tags<CR>
+"nmap <Leader>t :ProjectFiles<CR>
+nmap <Leader>t :Files<CR>
+nmap <Leader>a :Ag<CR>
 
 " Solarized
 Plug 'altercation/vim-colors-solarized'
+" SOLARIZED
+syntax enable
+set background=light
+colorscheme solarized
 
 " Supertab
 Plug 'ervandew/supertab'
 
-"" neocomplete
-"Plug 'Shougo/neocomplete.vim'
-
-" ale
+" ALE
 Plug 'w0rp/ale'
-
-" Lightline
-Plug 'itchyny/lightline.vim'
-
-
-call plug#end()
-
-" --------------------------------
-
 " ALE
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
+let g:ale_linters = {'rust': ['rls']}
 
+" Lightline
+Plug 'itchyny/lightline.vim'
 " Lightline
 let g:lightline = {
 \ 'colorscheme': 'wombat',
@@ -104,6 +111,13 @@ function! s:MaybeUpdateLightline()
 endfunction
 
 
+call plug#end()
+
+" --------------------------------
+
+
+
+
 
 
 
@@ -111,34 +125,8 @@ endfunction
 let mapleader = ","
 let maplocalleader = ","
 
-" ALE
-let g:ale_sign_warning = '▲'
-let g:ale_sign_error = '✗'
-highlight link ALEWarningSign String
-highlight link ALEErrorSign Title
 
-" SOLARIZED
-syntax enable
-set background=light
-colorscheme solarized
 
-"FZF
-""git as a project dir
-"function! s:find_git_root()
-"  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-"endfunction
-"command! ProjectFiles execute 'Files' s:find_git_root()
-
-" gitignore
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-" FZF (replaces Ctrl-P, FuzzyFinder and Command-T)
-set rtp+=/usr/local/opt/fzf
-set rtp+=~/.fzf
-nmap ; :Buffers<CR>
-nmap <Leader>r :Tags<CR>
-"nmap <Leader>t :ProjectFiles<CR>
-nmap <Leader>t :Files<CR>
-nmap <Leader>a :Ag<CR>
 
 
 " ----------------------------------------------------------------------------
