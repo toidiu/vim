@@ -1,5 +1,11 @@
 set nocompatible
 
+" Userfil macros
+nmap \v :vsplit<CR>
+nmap \s :split<CR>
+nmap \q :!q<CR>
+nmap \w :w<CR>
+
 " switch between last file
 nmap <C-e> :e#<CR>
 
@@ -12,6 +18,7 @@ nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
 nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
+
 
 " ----------------------------------------------------------------------------
 " PLUGIN SETTINGS
@@ -54,11 +61,11 @@ set background=light
 colorscheme solarized
 
 "FZF
-"git as a project dir
-function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
-command! ProjectFiles execute 'Files' s:find_git_root()
+""git as a project dir
+"function! s:find_git_root()
+"  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+"endfunction
+"command! ProjectFiles execute 'Files' s:find_git_root()
 
 " gitignore
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
@@ -67,7 +74,8 @@ set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
 nmap ; :Buffers<CR>
 nmap <Leader>r :Tags<CR>
-nmap <Leader>t :ProjectFiles<CR>
+"nmap <Leader>t :ProjectFiles<CR>
+nmap <Leader>t :Files<CR>
 nmap <Leader>a :Ag<CR>
 
 
