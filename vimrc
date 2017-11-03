@@ -1,21 +1,40 @@
 set nocompatible
 
+" switch between last file
+nmap <C-e> :e#<CR>
+
+" Move between open buffers.
+nmap <C-n> :bnext<CR>
+nmap <C-p> :bprev<CR>
+
+" Super fast window movement shortcuts
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
+
 " ----------------------------------------------------------------------------
 " PLUGIN SETTINGS
 " ----------------------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
 
-"fzf
+" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 "already installed
 "Plug '/usr/local/opt/fzf'
 "Plug 'junegunn/fzf.vim'
 
-"solarized
+" Solarized
 Plug 'altercation/vim-colors-solarized'
 
+
+" neocomplete
 Plug 'Shougo/neocomplete.vim'
+
+" ale
+Plug 'w0rp/ale'
+
 
 call plug#end()
 
@@ -23,23 +42,26 @@ call plug#end()
 let mapleader = ","
 let maplocalleader = ","
 
-" ----------------------------------------------------------------------------
-" Solarized
-" ----------------------------------------------------------------------------
-" Solarized stuff
+" ALE
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
+
+" SOLARIZED
 syntax enable
 set background=light
 colorscheme solarized
 
-" ----------------------------------------------------------------------------
 "FZF
-" ----------------------------------------------------------------------------
 "git as a project dir
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
+" gitignore
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 " FZF (replaces Ctrl-P, FuzzyFinder and Command-T)
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
@@ -104,9 +126,6 @@ set statusline=%F%m%r%w\ %=\ [%l,%c]\ \ \ %p%%
 "inoremap kj <ESC>
 
 
-" Remap window switching
-nnoremap qw <C-w><Right>
-nnoremap wq <C-w><Left>
 " Improved up/down scrolling on wrapped lines
 nnoremap j gj
 nnoremap k gk
