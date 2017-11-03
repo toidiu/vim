@@ -1,17 +1,69 @@
 set nocompatible
 
-""======= plugins
-call plug#begin('~/.vim/plugged')
+set tabstop=2 "Number of spaces that a <Tab> in the file counts for
+set shiftwidth=2 "Number of spaces to use for each step of (auto)indent
+set softtabstop=2 "Number of spaces that a <Tab> counts for while performing editing operations
+set expandtab "tabs expanded to spaces
+set smartindent "Do smart autoindenting when starting a new line
+set autoindent "Copy indent from current line when starting a new line
 
-"fzf
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+set showmatch "When a bracket is inserted, briefly jump to the matching one
+set number "show line numbers
+set scrolloff=5 "Minimal number of screen lines to keep above and below the cursor.
 
-call plug#end()
-""-----------------
+" Show tab characters, trailing whitespace
+set listchars=tab:>-,trail:~,extends:>,precedes:<
+set list "Show tabs as CTRL-I is displayed, display $ after end of line
+
+" ----------------------------------------------------------------------------
+" PLUGIN SETTINGS
+" ----------------------------------------------------------------------------
+
+" Use Pathogen for plugin management. See update.sh in this directory.
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+call pathogen#helptags()
+
+"execute pathogen#infect()
+
+" Solarized stuff
+syntax enable
+set background=light
+colorscheme solarized
+
+" For any plugins that use this, make their keymappings use comma
+let mapleader = ","
+let maplocalleader = ","
+
+"git as a project dir
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+command! ProjectFiles execute 'Files' s:find_git_root()
+
+" FZF (replaces Ctrl-P, FuzzyFinder and Command-T)
+set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
+nmap ; :Buffers<CR>
+nmap <Leader>r :Tags<CR>
+nmap <Leader>t :ProjectFiles<CR>
+nmap <Leader>a :Ag<CR>
+
+
+
+
+
+"""======= plugins
+"call plug#begin('~/.vim/plugged')
+"
+""fzf
+"Plug '/usr/local/opt/fzf'
+"Plug 'junegunn/fzf.vim'
+"
+"call plug#end()
+"""-----------------
 
 "asdfasdfasdf
-execute pathogen#infect()
 "filetype plugin indent on
 
 "=== The ":syntax enable" command will keep your current color settings.  This
@@ -24,27 +76,6 @@ if !exists("g:syntax_on")
 endif
 ""---
 
-set tabstop=2 "Number of spaces that a <Tab> in the file counts for
-set shiftwidth=2 "Number of spaces to use for each step of (auto)indent
-set softtabstop=2 "Number of spaces that a <Tab> counts for while performing editing operations
-set expandtab "tabs expanded to spaces
-set smartindent "Do smart autoindenting when starting a new line
-set autoindent "Copy indent from current line when starting a new line
-
-set showmatch "When a bracket is inserted, briefly jump to the matching one
-set number "show line numbers
-set scrolloff=5 "Minimal number of screen lines to keep above and below the cursor.
-
-""=== Show tab characters, trailing whitespace
-set listchars=tab:>-,trail:~,extends:>,precedes:<
-set list "Show tabs as CTRL-I is displayed, display $ after end of line
-""---
-
-""=== Solarized stuff
-let g:solarized_termtrans = 1
-set background=dark
-colorscheme solarized
-""---
 
 set hls "highlight search options
 set incsearch "While typing show incremental search
@@ -95,26 +126,9 @@ set autochdir " Automatically change current working directory to most recent fi
 
 
 
-"""enable ctrlp----------------------
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
-"let g:ctrlp_working_path_mode = 'ra'
-
-"""use ag serach instead of ack when available-------------------
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
 """ctags------------------------
-set tags=tags;/
-set tags+=~/.tags/scala/tags
-set tags+=~/.tags/finagle/tags
-set tags+=~/.tags/finch/tags
-set tags+=~/.tags/akka/tags
-set tags+=~/.tags/playframework/tags
+"set tags=tags;/
+"set tags+=~/.tags/scala/tags
 
 
 """neocomplete----------------
@@ -192,8 +206,4 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 
 
-" fzf
-nmap ; :Buffers<CR>
-nmap <Leader>t :Files<CR>
-nmap <Leader>r :Tags<CR>
 
