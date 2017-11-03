@@ -28,6 +28,28 @@ call plug#begin('~/.vim/plugged')
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+
+" Solarized
+Plug 'altercation/vim-colors-solarized'
+
+" Supertab
+Plug 'ervandew/supertab'
+
+" ALE
+Plug 'w0rp/ale'
+
+" Lightline
+Plug 'itchyny/lightline.vim'
+
+
+call plug#end()
+
+" For any plugins that use this, make their keymappings use comma
+let mapleader = ","
+let maplocalleader = ","
+" --------------------------------
+
+" FZF
 ""git as a project dir
 "function! s:find_git_root()
 "  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
@@ -44,14 +66,6 @@ nmap <Leader>r :Tags<CR>
 nmap <Leader>t :Files<CR>
 nmap <Leader>a :Ag<CR>
 
-" Solarized
-Plug 'altercation/vim-colors-solarized'
-
-" Supertab
-Plug 'ervandew/supertab'
-
-" ALE
-Plug 'w0rp/ale'
 " ALE
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
@@ -60,8 +74,6 @@ highlight link ALEErrorSign Title
 let g:ale_linters = {'rust': ['rls']}
 let g:ale_rust_cargo_use_check = 1
 
-" Lightline
-Plug 'itchyny/lightline.vim'
 " Lightline
 let g:lightline = {
 \ 'colorscheme': 'wombat',
@@ -107,11 +119,6 @@ function! s:MaybeUpdateLightline()
   end
 endfunction
 
-
-call plug#end()
-
-" --------------------------------
-
 " SOLARIZED
 syntax enable
 set background=light
@@ -122,9 +129,6 @@ colorscheme solarized
 
 
 
-" For any plugins that use this, make their keymappings use comma
-let mapleader = ","
-let maplocalleader = ","
 
 
 
