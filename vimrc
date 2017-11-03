@@ -46,10 +46,6 @@ nmap <Leader>a :Ag<CR>
 
 " Solarized
 Plug 'altercation/vim-colors-solarized'
-" SOLARIZED
-syntax enable
-set background=light
-colorscheme solarized
 
 " Supertab
 Plug 'ervandew/supertab'
@@ -62,6 +58,7 @@ let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 let g:ale_linters = {'rust': ['rls']}
+let g:ale_rust_cargo_use_check = 1
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -115,6 +112,10 @@ call plug#end()
 
 " --------------------------------
 
+" SOLARIZED
+syntax enable
+set background=light
+colorscheme solarized
 
 
 
