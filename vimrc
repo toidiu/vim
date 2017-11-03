@@ -1,40 +1,39 @@
 set nocompatible
 
-set tabstop=2 "Number of spaces that a <Tab> in the file counts for
-set shiftwidth=2 "Number of spaces to use for each step of (auto)indent
-set softtabstop=2 "Number of spaces that a <Tab> counts for while performing editing operations
-set expandtab "tabs expanded to spaces
-set smartindent "Do smart autoindenting when starting a new line
-set autoindent "Copy indent from current line when starting a new line
-
-set showmatch "When a bracket is inserted, briefly jump to the matching one
-set number "show line numbers
-set scrolloff=5 "Minimal number of screen lines to keep above and below the cursor.
-
-" Show tab characters, trailing whitespace
-set listchars=tab:>-,trail:~,extends:>,precedes:<
-set list "Show tabs as CTRL-I is displayed, display $ after end of line
-
 " ----------------------------------------------------------------------------
 " PLUGIN SETTINGS
 " ----------------------------------------------------------------------------
+call plug#begin('~/.vim/plugged')
 
-" Use Pathogen for plugin management. See update.sh in this directory.
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
+"fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+"already installed
+"Plug '/usr/local/opt/fzf'
+"Plug 'junegunn/fzf.vim'
 
-"execute pathogen#infect()
+"solarized
+Plug 'altercation/vim-colors-solarized'
 
-" Solarized stuff
-syntax enable
-set background=light
-colorscheme solarized
+Plug 'Shougo/neocomplete.vim'
+
+call plug#end()
 
 " For any plugins that use this, make their keymappings use comma
 let mapleader = ","
 let maplocalleader = ","
 
+" ----------------------------------------------------------------------------
+" Solarized
+" ----------------------------------------------------------------------------
+" Solarized stuff
+syntax enable
+set background=light
+colorscheme solarized
+
+" ----------------------------------------------------------------------------
+"FZF
+" ----------------------------------------------------------------------------
 "git as a project dir
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
@@ -50,19 +49,23 @@ nmap <Leader>t :ProjectFiles<CR>
 nmap <Leader>a :Ag<CR>
 
 
+" ----------------------------------------------------------------------------
+" Other
+" ----------------------------------------------------------------------------
+set tabstop=2 "Number of spaces that a <Tab> in the file counts for
+set shiftwidth=2 "Number of spaces to use for each step of (auto)indent
+set softtabstop=2 "Number of spaces that a <Tab> counts for while performing editing operations
+set expandtab "tabs expanded to spaces
+set smartindent "Do smart autoindenting when starting a new line
+set autoindent "Copy indent from current line when starting a new line
 
+set showmatch "When a bracket is inserted, briefly jump to the matching one
+set number "show line numbers
+set scrolloff=5 "Minimal number of screen lines to keep above and below the cursor.
 
-
-
-"""======= plugins
-"call plug#begin('~/.vim/plugged')
-"
-""fzf
-"Plug '/usr/local/opt/fzf'
-"Plug 'junegunn/fzf.vim'
-"
-"call plug#end()
-"""-----------------
+" Show tab characters, trailing whitespace
+set listchars=tab:>-,trail:~,extends:>,precedes:<
+set list "Show tabs as CTRL-I is displayed, display $ after end of line
 
 "asdfasdfasdf
 "filetype plugin indent on
@@ -123,7 +126,7 @@ augroup AutoReloadVimRC
     au BufWritePost $MYVIMRC so $MYVIMRC
 augroup END
 
-set autochdir " Automatically change current working directory to most recent file
+"set autochdir " Automatically change current working directory to most recent file
 
 
 
