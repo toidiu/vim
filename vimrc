@@ -4,7 +4,6 @@ set nocompatible
 nmap \v :vsplit<CR>
 nmap \s :split<CR>
 nmap \q :q<CR>
-nmap \w :w<CR>
 nmap \e :NERDTreeToggle<CR>
 
 " switch between last file
@@ -20,9 +19,12 @@ nmap <C-k> <C-W>k
 nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
 
-" Scroll
+" Move
 nmap <S-J> <C-D>
 nmap <S-K> <C-U>
+nmap <S-H> b
+nmap <S-L> e
+nmap b <C-%>
 
 " ----------------------------------------------------------------------------
 " PLUGIN SETTINGS
