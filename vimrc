@@ -53,6 +53,7 @@ nmap <Leader>a :Ag<CR>
 
 
 
+
 """======= plugins
 "call plug#begin('~/.vim/plugged')
 "
@@ -87,7 +88,6 @@ hi CursorLine ctermbg=NONE cterm=underline "no color, just underline
 set wildmode=longest,list "on tab filename complete, first tab produces longest. Second tab produces list.
 
 
-"Asdfasdf
 
 set backspace=indent,eol,start "allow backspacing over indent, eol, start
 set laststatus=2 " Set status line as second-to-last line
@@ -102,11 +102,8 @@ set statusline=%F%m%r%w\ %=\ [%l,%c]\ \ \ %p%%
 
 
 " Remap window switching
-nnoremap op <C-w><Right>
-nnoremap po <C-w><Left>
-nnoremap qw <C-w><Left>
+nnoremap qw <C-w><Right>
 nnoremap wq <C-w><Left>
-nnoremap wee <C-W><=>
 " Improved up/down scrolling on wrapped lines
 nnoremap j gj
 nnoremap k gk
@@ -114,6 +111,10 @@ nnoremap k gk
 "nnoremap <down> gj
 imap <up> <c-o>gk
 imap <down> <c-o>gj
+" Remap window sizing
+nmap <Leader>g :vertical resize 80%<CR>
+nmap <Leader>z <C-w>=
+nmap f :vertical resize +10<CR>
 
 """auto reload vim----------------------
 augroup AutoReloadVimRC
