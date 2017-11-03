@@ -1,6 +1,6 @@
 set nocompatible
 
-" Userfil macros
+" Userful macros
 nmap \v :vsplit<CR>
 nmap \s :split<CR>
 nmap \q :q<CR>
