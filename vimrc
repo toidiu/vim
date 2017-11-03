@@ -5,6 +5,7 @@ nmap \v :vsplit<CR>
 nmap \s :split<CR>
 nmap \q :q<CR>
 nmap \w :w<CR>
+nmap \e :NERDTreeToggle<CR>
 
 " switch between last file
 nmap <C-e> :e#<CR>
@@ -19,6 +20,9 @@ nmap <C-k> <C-W>k
 nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
 
+" Scroll
+nmap <S-J> <C-D>
+nmap <S-K> <C-U>
 
 " ----------------------------------------------------------------------------
 " PLUGIN SETTINGS
@@ -39,8 +43,10 @@ Plug 'ervandew/supertab'
 Plug 'w0rp/ale'
 
 " Lightline
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
 
+" NerdTree
+Plug 'scrooloose/nerdtree'
 
 call plug#end()
 
@@ -74,57 +80,58 @@ highlight link ALEErrorSign Title
 let g:ale_linters = {'rust': ['rls']}
 let g:ale_rust_cargo_use_check = 1
 
-" Lightline
-let g:lightline = {
-\ 'colorscheme': 'wombat',
-\ 'active': {
-\   'left': [['mode', 'paste'], ['filename', 'modified']],
-\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
-\ },
-\ 'component_expand': {
-\   'linter_warnings': 'LightlineLinterWarnings',
-\   'linter_errors': 'LightlineLinterErrors',
-\   'linter_ok': 'LightlineLinterOK'
-\ },
-\ 'component_type': {
-\   'readonly': 'error',
-\   'linter_warnings': 'warning',
-\   'linter_errors': 'error'
-\ },
-\ }
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
-endfunction
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
-endfunction
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '✓ ' : ''
-endfunction
-
-" Update and show lightline but only if it's visible (e.g., not in Goyo)
-autocmd User ALELint call s:MaybeUpdateLightline()
-function! s:MaybeUpdateLightline()
-  if exists('#lightline')
-    call lightline#update()
-  end
-endfunction
+"" Lightline
+"let g:lightline = {
+"\ 'colorscheme': 'wombat',
+"\ 'active': {
+"\   'left': [['mode', 'paste'], ['filename', 'modified']],
+"\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+"\ },
+"\ 'component_expand': {
+"\   'linter_warnings': 'LightlineLinterWarnings',
+"\   'linter_errors': 'LightlineLinterErrors',
+"\   'linter_ok': 'LightlineLinterOK'
+"\ },
+"\ 'component_type': {
+"\   'readonly': 'error',
+"\   'linter_warnings': 'warning',
+"\   'linter_errors': 'error'
+"\ },
+"\ }
+"function! LightlineLinterWarnings() abort
+"  let l:counts = ale#statusline#Count(bufnr(''))
+"  let l:all_errors = l:counts.error + l:counts.style_error
+"  let l:all_non_errors = l:counts.total - l:all_errors
+"  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+"endfunction
+"function! LightlineLinterErrors() abort
+"  let l:counts = ale#statusline#Count(bufnr(''))
+"  let l:all_errors = l:counts.error + l:counts.style_error
+"  let l:all_non_errors = l:counts.total - l:all_errors
+"  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+"endfunction
+"function! LightlineLinterOK() abort
+"  let l:counts = ale#statusline#Count(bufnr(''))
+"  let l:all_errors = l:counts.error + l:counts.style_error
+"  let l:all_non_errors = l:counts.total - l:all_errors
+"  return l:counts.total == 0 ? '✓ ' : ''
+"endfunction
+"
+"" Update and show lightline but only if it's visible (e.g., not in Goyo)
+"autocmd User ALELint call s:MaybeUpdateLightline()
+"function! s:MaybeUpdateLightline()
+"  if exists('#lightline')
+"    call lightline#update()
+"  end
+"endfunction
 
 " SOLARIZED
 syntax enable
 set background=light
 colorscheme solarized
 
-
+" Custom colors for NERDTree
+highlight def link NERDTreeRO NERDTreeFile
 
 
 
