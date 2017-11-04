@@ -14,17 +14,18 @@ nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
 
 " Super fast window movement shortcuts
-nmap <C-j> <C-W>j
-nmap <C-k> <C-W>k
-nmap <C-h> <C-W>h
-nmap <C-l> <C-W>l
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
 
 " Move
-nmap <S-J> <C-D>
-nmap <S-K> <C-U>
-nmap <S-H> b
-nmap <S-L> e
-nmap b <C-%>
+noremap <S-J> <C-D>
+noremap <S-K> <C-U>
+noremap <S-H> b
+noremap <S-L> e
+noremap b <C-%>
+noremap e ciw
 
 " ----------------------------------------------------------------------------
 " PLUGIN SETTINGS
