@@ -1,31 +1,46 @@
 set nocompatible
 
+" For any plugins that use this, make their keymappings use comma
+let mapleader = ","
+let maplocalleader = ","
+
 " Userful macros
 nmap \v :vsplit<CR>
 nmap \s :split<CR>
-nmap \q :q<CR>
 nmap \e :NERDTreeToggle<CR>
 
+" Buffers --------
 " switch between last file
 nmap <C-e> :e#<CR>
 
 " Move between open buffers.
-nmap <C-n> :bnext<CR>
-nmap <C-p> :bprev<CR>
+"nmap <C-n> :bnext<CR>
+"nmap <C-p> :bprev<CR>
+:nnoremap <Leader>q :bd<CR>
 
+" Window ---------
 " Super fast window movement shortcuts
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 
-" Move
+" Move -----------
 noremap <S-J> <C-D>
 noremap <S-K> <C-U>
 noremap <S-H> b
 noremap <S-L> e
 noremap b <C-%>
-noremap e ciw
+
+" Word -----------
+" search and replace
+"noremap e ciw
+":nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+
+" I always hit ":W" instead of ":w" because I linger on the shift key...
+command! Q q
+command! W w
+command! Wq wq
 
 " ----------------------------------------------------------------------------
 " PLUGIN SETTINGS
@@ -53,9 +68,6 @@ Plug 'scrooloose/nerdtree'
 
 call plug#end()
 
-" For any plugins that use this, make their keymappings use comma
-let mapleader = ","
-let maplocalleader = ","
 " --------------------------------
 
 " FZF
