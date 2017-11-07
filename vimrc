@@ -52,7 +52,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
 " Solarized
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
+
+Plug 'chriskempson/base16-vim'
 
 " Supertab
 Plug 'ervandew/supertab'
@@ -143,10 +145,9 @@ let g:ale_rust_cargo_use_check = 1
 "  end
 "endfunction
 
-" SOLARIZED
-syntax enable
-set background=light
-colorscheme solarized
+"" SOLARIZED
+"set background=light
+"colorscheme solarized
 
 " Custom colors for NERDTree
 highlight def link NERDTreeRO NERDTreeFile
