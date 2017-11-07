@@ -66,6 +66,9 @@ Plug 'w0rp/ale'
 " NerdTree
 Plug 'scrooloose/nerdtree'
 
+" GitGutter
+Plug 'airblade/vim-gitgutter'
+
 call plug#end()
 
 " --------------------------------
