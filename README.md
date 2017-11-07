@@ -1,3 +1,5 @@
+DEPRECATED instead use https://github.com/toidiu/dotfiles
+
 # vimrc
 setting up vim preferences
 
